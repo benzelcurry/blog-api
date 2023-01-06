@@ -31,6 +31,7 @@ exports.create_post = [
   (req, res, next) => {
     const errors = validationResult(req);
 
+    // Might need to change how author info is grabbed once client is built
     const post = new Post({
       title: req.body.title,
       content: req.body.content,
@@ -47,9 +48,9 @@ exports.create_post = [
       return;
     }
 
+    // Will probably want to edit to include meaningful content in the response
     post.save((err) => {
       if (err) { return next(err) };
-      // Might want to modify this once client is up and running
       res.json('Post successfully created.');
     });
   },

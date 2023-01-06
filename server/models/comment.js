@@ -6,6 +6,7 @@ const CommentSchema = new Schema({
   content: { type: String, required: true, maxLength: 500 },
   date_posted: {type: Date, required: true },
   author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  parent_post: { type: Schema.Types.ObjectId, ref: 'Post', required: true },
 });
 
 CommentSchema.virtual('url').get(function() {
