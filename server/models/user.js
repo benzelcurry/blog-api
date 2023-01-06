@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const { DateTime } = require('luxon');
 
 const UserSchema = new Schema({
-  username: { type: String, required: true, maxLength: 16 },
+  username: { type: String, required: true, minLength: 3, maxLength: 16 },
   password: { type: String, required: true, maxLength: 100 },
   account_created: { type: Date, required: true },
   full_name: { type: String, required: false, maxLength: 100 },
