@@ -6,4 +6,9 @@ router.get('/', (req, res) => {
   res.json('Hello, World!');
 });
 
+// GET test message
+router.get('/test', (req, res) => {
+  res.json("You've reached the test message!");
+});
+
 module.exports = router;
