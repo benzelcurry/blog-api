@@ -5,6 +5,8 @@ const compression = require('compression');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 
+const indexRouter = require('./routes/index');
+
 require('dotenv').config();
 
 const mongoDB = process.env.MONGODB_URI;
@@ -17,8 +19,6 @@ const app = express();
 app.use(helmet());
 app.use(compression());
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
+app.use('/', indexRouter);
 
 app.listen(process.env.PORT, () => console.log(`Listening on Port ${process.env.PORT}`));
