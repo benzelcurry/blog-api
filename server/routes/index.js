@@ -16,6 +16,9 @@ router.get('/', (req, res) => {
 // GET list of blog posts
 router.get('/posts', post_controller.post_list);
 
+// POST request for creating new blog post
+router.post('/posts', post_controller.create_post);
+
 
 ///// USER ROUTES /////
 
