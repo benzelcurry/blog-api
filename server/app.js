@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const compression = require('compression');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
-const multer = require('multer');
+const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 
@@ -17,6 +17,7 @@ db.on('error', console.error.bind(console, 'mongo connection error'));
 
 const app = express();
 
+app.use(cors());
 app.use(helmet());
 app.use(compression());
 app.use(express.urlencoded({ extended: false }));

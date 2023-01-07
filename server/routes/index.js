@@ -8,7 +8,7 @@ const comment_controller = require('../controllers/commentController');
 
 // GET home page
 router.get('/', (req, res) => {
-  res.json(req);
+  res.json('Hello, World!');
 });
 
 
@@ -22,6 +22,9 @@ router.post('/posts', post_controller.create_post);
 
 
 ///// USER ROUTES /////
+
+// GET request for returning list of users
+router.get('/users', user_controller.user_list);
 
 // POST request for creating new user
 router.post('/users', user_controller.user_create_post);
