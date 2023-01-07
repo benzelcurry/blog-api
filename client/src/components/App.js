@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { DateTime } from 'luxon';
 
 import '../stylesheets/App.css';
@@ -26,10 +26,11 @@ const App = () => {
   }, []);
 
   const displayAuthor = (author) => {
-    const result = users.find(user => user._id === author);
-
-    return result.username;
-  }
+    if (users.length > 0) {
+      const result = users.find(user => user._id === author);
+      return result.username;
+    }
+  };
 
   return (
     <div className='app'>
