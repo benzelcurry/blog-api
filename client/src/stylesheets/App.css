@@ -9,6 +9,7 @@
   height: 300px;
   width: 300px;
   display: flex;
+  flex-direction: column;
   border: solid 3px black;
   border-radius: 10px;
   padding: 20px;
