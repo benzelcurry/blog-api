@@ -1,6 +1,6 @@
 // Navbar component
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import '../stylesheets/Nav.css';
 

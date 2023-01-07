@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 
 import Nav from './Nav';
+import Footer from './Footer';
 import '../stylesheets/App.css';
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
