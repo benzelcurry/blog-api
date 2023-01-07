@@ -1,6 +1,9 @@
+// Homepage component
+
 import React, { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 
+import Nav from './Nav';
 import '../stylesheets/App.css';
 
 const App = () => {
@@ -34,19 +37,22 @@ const App = () => {
 
   return (
     // WILL WANT TO GATHER ICON .SVG'S FOR COMMENTS/WHOLE POST/ETC.
-    <div className='app'>
-      {posts.map((post) => 
-        <div key={post._id} className='post-card'>
-          <div className="card-info">
-            <div className="card-title">{post.title}</div>
-            <div className="card-date">
-              {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
+    <div className="app">
+      <Nav />
+      <div className='posts'>
+        {posts.map((post) =>
+          <div key={post._id} className='post-card'>
+            <div className="card-info">
+              <div className="card-title">{post.title}</div>
+              <div className="card-date">
+                {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
+              </div>
             </div>
+            <div className="card-author">{displayAuthor(post.author)}</div>
+            <div className="card-content">{post.content}</div>
           </div>
-          <div className="card-author">{displayAuthor(post.author)}</div>
-          <div className="card-content">{post.content}</div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
