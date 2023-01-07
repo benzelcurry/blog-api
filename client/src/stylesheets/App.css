@@ -1,0 +1,15 @@
+.app {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post-card {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  border: solid 3px black;
+  border-radius: 10px;
+  padding: 20px;
+}
