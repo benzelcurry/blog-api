@@ -1,8 +1,9 @@
 // Homepage component
 
 import React, { useState, useEffect } from 'react';
-import { DateTime } from 'luxon';
+// import { DateTime } from 'luxon';
 
+import Card from './Card';
 import Nav from './Nav';
 import Footer from './Footer';
 import '../stylesheets/App.css';
@@ -29,29 +30,13 @@ const App = () => {
     });
   }, []);
 
-  const displayAuthor = (author) => {
-    if (users.length > 0) {
-      const result = users.find(user => user._id === author);
-      return result.username;
-    }
-  };
-
   return (
     // WILL WANT TO GATHER ICON .SVG'S FOR COMMENTS/WHOLE POST/ETC.
     <div className="app">
       <Nav />
       <div className='posts'>
-        {posts.map((post) =>
-          <div key={post._id} className='post-card'>
-            <div className="card-info">
-              <div className="card-title">{post.title}</div>
-              <div className="card-date">
-                {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
-              </div>
-            </div>
-            <div className="card-author">{displayAuthor(post.author)}</div>
-            <div className="card-content">{post.content}</div>
-          </div>
+        {posts.map((post) => 
+          <Card key={post._id} users={users} post={post} />  
         )}
       </div>
       <Footer />
