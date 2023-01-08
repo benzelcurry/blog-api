@@ -1,7 +1,10 @@
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 
+const async = require('async');
 const { body, validationResult } = require('express-validator');
 
+// Return list of all blog posts
 exports.post_list = function (req, res, next) {
   Post.find()
     .sort([['date_posted', 'descending']])
@@ -13,6 +16,38 @@ exports.post_list = function (req, res, next) {
     });
 };
 
+// Return details for a single blog post
+exports.post_detail = (req, res, next) => {
+  async.parallel(
+    {
+      post(callback) {
+        Post.findById(req.params.id).exec(callback);
+      },
+      post_comments(callback) {
+        Comment.find({ parent_post: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        // Error in API usage
+        return next(err);
+      }
+      if (results.post === null) {
+        // No blog posts with matching ID
+        const err = new Error('Blog post not found');
+        err.status = 404;
+        return next(err);
+      }
+      // Successful, so return necessary data
+      res.json({
+        post: results.post,
+        comments: results.post_comments,
+      });
+    },
+  );
+};
+
+// Create a blog post on POST
 exports.create_post = [
   body('title')
     .trim()

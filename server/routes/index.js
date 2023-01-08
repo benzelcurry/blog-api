@@ -20,6 +20,9 @@ router.get('/posts', post_controller.post_list);
 // POST request for creating new blog post
 router.post('/posts', post_controller.create_post);
 
+// GET request for blog post details
+router.get('/posts/:id', post_controller.post_detail);
+
 
 ///// USER ROUTES /////
 
