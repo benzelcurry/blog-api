@@ -1,3 +1,5 @@
+// Component for displaying blog post previews on home page
+
 import React, { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
 
@@ -15,7 +17,7 @@ const Card = ({ users, post }) => {
     .then((data) => {
       setComments(data.total_comments)
     });
-    
+
     // Checking for infinite rendering; delete before deployment
     console.log('Total comments hook');
   }, [comments, post._id]);
