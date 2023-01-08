@@ -1,6 +1,7 @@
 // Component for displaying blog post previews on home page
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
 import '../stylesheets/Card.css';
@@ -46,10 +47,12 @@ const Card = ({ users, post }) => {
       </div>
       <div className="card-author">{author}</div>
       <div className="card-content">{post.content}</div>
-      <i className='more-info'>
-        <div>{comments}</div>
-        <img src={Comment} alt='Comments' className='comment' />
-      </i>
+      <Link to={ '/post' } className='post-link'>
+        <i className='more-info'>
+          <div>{comments}</div>
+          <img src={Comment} alt='Comments' className='comment' />
+        </i>
+      </Link>
     </div>
   );
 };

@@ -5,12 +5,14 @@ import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App';
+import Post from './Post';
 
 const RouteSwitch = () => {
   return (
     <HashRouter>
       <Routes>
         <Route path='/' element={ <App /> } />
+        <Route path='/post' element={ <Post /> } />
       </Routes>
     </HashRouter>
   );
