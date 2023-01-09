@@ -30,15 +30,18 @@ const Post = () => {
     <div className='blog-post'>
       <Nav />
       <div className='post'>
-        <div className="post-title">{post.title}</div>
-        <div className="post-author">{myData.author}</div>
-        <div className="post-date">
+        <h1 className="post-title">{post.title}</h1>
+        <h3 className="post-author">{myData.author}</h3>
+        <h4 className="post-date">
           {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
+        </h4>
+        <p className="post-content">{post.content}</p>
+        <div className="post-comments">
+          <h4 className='comments-header'>Comments:</h4>
+          {comments.map((comment) =>
+            <Comment key={comment._id} comment={comment} author={myData.author} />
+          )}
         </div>
-        <div className="post-content">{post.content}</div>
-        {comments.map((comment) => 
-          <Comment key={comment._id} comment={comment} author={myData.author} />
-        )}
       </div>
       <Footer />
     </div>
