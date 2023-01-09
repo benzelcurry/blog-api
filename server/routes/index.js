@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 // Require controller modules
 const post_controller = require('../controllers/postController');
@@ -42,5 +43,6 @@ router.post('/comments', comment_controller.create_comment);
 
 ///// LOG-IN ROUTE /////
 router.post('/login', user_controller.login_user);
+
 
 module.exports = router;

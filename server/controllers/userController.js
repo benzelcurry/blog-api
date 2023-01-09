@@ -91,7 +91,11 @@ exports.login_user = (req, res, next) => {
       bcrypt.compare(req.body.password, results.user.password, (err, isValid) => {
         if (isValid) {
           const secret = process.env.SECRET_KEY;
-          const token = jwt.sign({ username: req.body.username }, secret, { expiresIn: 30 });
+          const token = jwt.sign( 
+            { username: req.body.username, id: results.user._id },
+            secret, 
+            { expiresIn: '30d' },
+          );
           return res.status(200).json({
             message: 'Successful',
             token
