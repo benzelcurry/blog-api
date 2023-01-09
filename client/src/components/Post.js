@@ -9,6 +9,7 @@ import '../stylesheets/Post.css';
 const Post = () => {
   const { id } = useParams();
   const [post, setPost] = useState({});
+  const [comments, setComments] = useState([]);
   const location = useLocation();
   const author = location.state;
 
@@ -17,6 +18,7 @@ const Post = () => {
     .then((response) => response.json())
     .then((data) => {
       setPost(data.post);
+      setComments(data.comments);
     });
 
     // Checks for infinite rendering; delete before deployment
@@ -29,6 +31,13 @@ const Post = () => {
       <div className='post'>
         <div className="post-title">{post.title}</div>
         <div className="post-author">{author}</div>
+        <div className="post-date">
+          {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
+        </div>
+        <div className="post-content">{post.content}</div>
+        {comments.map((comment) => 
+          <div>{comment.content}</div>
+        )}
       </div>
       <Footer />
     </div>
