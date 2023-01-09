@@ -10,6 +10,7 @@ import Comment from '../images/comment.svg';
 const Card = ({ users, post }) => {
   const [author, setAuthor] = useState();
   const [comments, setComments] = useState();
+  const myData = {author: author, users: users};
 
   // Gets number of comments on post
   useEffect(() => {
@@ -47,7 +48,7 @@ const Card = ({ users, post }) => {
       </div>
       <div className="card-author">{author}</div>
       <div className="card-content">{post.content}</div>
-      <Link to={ `/post/${post._id}` } state={author} className='post-link'>
+      <Link to={ `/post/${post._id}` } state={myData} className='post-link'>
         <i className='more-info'>
           <div>{comments}</div>
           <img src={Comment} alt='Comments' className='comment' />
