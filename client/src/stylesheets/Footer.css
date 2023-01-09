@@ -5,4 +5,5 @@
   height: 80px;
   width: 100%;
   background-color: rgb(133, 164, 204);
+  flex-shrink: 0;
 }

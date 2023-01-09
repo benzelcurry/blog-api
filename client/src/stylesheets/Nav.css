@@ -4,4 +4,5 @@
   justify-content: center;
   align-items: center;
   background-color: rgb(133, 164, 204);
+  flex-shrink: 0;
 }
