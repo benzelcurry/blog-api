@@ -5,6 +5,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const indexRouter = require('./routes/index');
 
@@ -21,6 +22,8 @@ app.use(cors());
 app.use(helmet());
 app.use(compression());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 

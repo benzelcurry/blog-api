@@ -1,7 +1,10 @@
 const User = require('../models/user');
 
 const { body, validationResult } = require('express-validator');
+const async = require('async');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // Return list of Users on GET
 exports.user_list = (req, res, next) => {
@@ -65,3 +68,38 @@ exports.user_create_post = [
     });
   },
 ];
+
+// Handle User login on POST
+exports.login_user = (req, res, next) => {
+  async.parallel(
+    {
+      user(callback) {
+        User.findOne({ username: req.body.username }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        // Error in API usage
+        return next(err);
+      }
+      if (!results.user) {
+        // No user with matching username found
+        const err = new Error('Username does not exist');
+        err.status = 401;
+        return next(err);
+      }
+      bcrypt.compare(req.body.password, results.user.password, (err, isValid) => {
+        if (isValid) {
+          const secret = process.env.SECRET_KEY;
+          const token = jwt.sign({ username: req.body.username }, secret, { expiresIn: 30 });
+          return res.status(200).json({
+            message: 'Successful',
+            token
+          });
+        } else {
+          res.status(401).json('Authentication Failed');
+        }
+      })
+    }
+  );
+}

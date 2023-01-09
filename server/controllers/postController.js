@@ -42,6 +42,7 @@ exports.post_detail = (req, res, next) => {
       res.json({
         post: results.post,
         comments: results.post_comments,
+        total_comments: results.post_comments.length,
       });
     },
   );

@@ -39,4 +39,8 @@ router.post('/users', user_controller.user_create_post);
 // POST request for creating new comment
 router.post('/comments', comment_controller.create_comment);
 
+
+///// LOG-IN ROUTE /////
+router.post('/login', user_controller.login_user);
+
 module.exports = router;
