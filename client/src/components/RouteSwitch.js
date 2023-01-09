@@ -12,7 +12,7 @@ const RouteSwitch = () => {
     <HashRouter>
       <Routes>
         <Route path='/' element={ <App /> } />
-        <Route path='/post' element={ <Post /> } />
+        <Route path='/post/:id' element={ <Post /> } />
       </Routes>
     </HashRouter>
   );

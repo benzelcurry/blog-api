@@ -1,15 +1,17 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import Nav from './Nav';
 import Footer from './Footer';
 import '../stylesheets/Post.css';
 
-// FLESH THIS COMPONENT OUT TO SHOW POST DETAILS
 const Post = () => {
+  const { id } = useParams();
+
   return (
     <div className='blog-post'>
       <Nav />
-      <div className='post'>Hello, World!</div>
+      <div className='post'>{ id }</div>
       <Footer />
     </div>
   );
