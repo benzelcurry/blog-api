@@ -1,7 +1,6 @@
 // Homepage component
 
 import React, { useState, useEffect } from 'react';
-// import { DateTime } from 'luxon';
 
 import Card from './Card';
 import Nav from './Nav';
