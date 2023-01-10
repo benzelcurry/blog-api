@@ -10,7 +10,15 @@ const comment_controller = require('../controllers/commentController');
 
 // Test if user is logged in
 router.get('/', (req, res) => {
-  res.json(req.cookies.token);
+  // if (req.cookies.token) {
+  //   const decrypt = jwt.verify(token, process.env.SECRET_KEY);
+  //     res.json({
+  //       username: decrypt.username,
+  //       id: decrypt.id,
+  //     });
+  // } else {
+  //   res.json('');
+  // }
 });
 
 

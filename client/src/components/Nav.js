@@ -1,11 +1,25 @@
 // Navbar component
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import '../stylesheets/Nav.css';
 
 const Nav = () => {
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    axios.get(
+      'http://localhost:3001/', 
+      { withCredentials: true },
+    )
+      .then((response) => {
+        console.log(response.data);
+        setUser(response.data.username);
+      })
+  }, [])
+
   return (
     <div className='header'>
       <div className="buttons">
@@ -15,6 +29,12 @@ const Nav = () => {
         <Link to={'/login'}>
           <button className='log-in'>Log In</button>
         </Link>
+        {
+          user ? 
+          <button>{user}</button>
+          :
+          <button>Nope</button>
+        }
       </div>
     </div>
   );

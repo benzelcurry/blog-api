@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 // const verifyToken = require('./middleware/authMiddleware');
 // const jwt = require('express-jwt');
 // const jsonwebtoken = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const indexRouter = require('./routes/index');
 
@@ -43,7 +44,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.json(req.cookies);
+  // res.json(req.cookies);
+  if (req.cookies.token) {
+    const decrypt = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
+      res.json({
+        username: decrypt.username,
+        id: decrypt.id,
+      });
+  } else {
+    res.json('');
+  }
 })
 
 app.use('/', indexRouter);

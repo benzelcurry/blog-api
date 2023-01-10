@@ -8,7 +8,6 @@ import '../stylesheets/LogIn.css';
 const LogIn = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [token, setToken] = useState();
 
   const getToken = async (e) => {
     e.preventDefault();
