@@ -13,7 +13,7 @@ const LogIn = () => {
   const getToken = async (e) => {
     e.preventDefault();
     const body = { username: username, password: password };
-    axios.post('http://localhost:3001/login', body)
+    axios.post('/login', body)
       .then((response) => {
         console.log(response);
       })
