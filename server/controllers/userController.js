@@ -84,7 +84,7 @@ exports.login_user = (req, res, next) => {
       }
       if (!results.user) {
         // No user with matching username found
-        const err = new Error('Username does not exist');
+        const err = new Error(`Username does not exist`);
         err.status = 401;
         return next(err);
       }
@@ -96,9 +96,12 @@ exports.login_user = (req, res, next) => {
             secret, 
             { expiresIn: '30d' },
           );
+
+          res.cookie('token', token, { secure: false, httpOnly: true });
+
           return res.status(200).json({
             message: 'Successful',
-            token
+            token,
           });
         } else {
           res.status(401).json('Authentication Failed');

@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // Require controller modules
 const post_controller = require('../controllers/postController');
 const user_controller = require('../controllers/userController');
 const comment_controller = require('../controllers/commentController');
 
-// GET home page
+// Test if user is logged in
 router.get('/', (req, res) => {
-  res.json('Hello, World!');
+  res.json(req.cookies.token);
 });
 
 

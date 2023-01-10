@@ -6,6 +6,10 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+// const verifyToken = require('./middleware/authMiddleware');
+// const jwt = require('express-jwt');
+// const jsonwebtoken = require('jsonwebtoken');
 
 const indexRouter = require('./routes/index');
 
@@ -18,12 +22,29 @@ db.on('error', console.error.bind(console, 'mongo connection error'));
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ],
+  credentials: true,
+}));
 app.use(helmet());
 app.use(compression());
+app.use(cookieParser());
+// app.use(jwt({
+//   secret: process.env.SECRET_KEY,
+//   algorithms: ['HS256'],
+//   getToken: req => req.cookies.token
+// }));
+// app.use(verifyToken);
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+  res.json(req.cookies);
+})
 
 app.use('/', indexRouter);
 
