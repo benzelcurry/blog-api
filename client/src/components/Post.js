@@ -11,6 +11,7 @@ const Post = () => {
   const { id } = useParams();
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
+  const [chars, setChars] = useState(0);
   const location = useLocation();
   const myData = location.state;
 
@@ -26,6 +27,10 @@ const Post = () => {
     console.log('infinite post check');
   }, [myData.author, id]);
 
+  const handleTyping = (e) => {
+    setChars(e.target.value.length);
+  }
+
   return (
     <div className='blog-post'>
       <Nav />
@@ -36,6 +41,22 @@ const Post = () => {
           {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
         </h4>
         <p className="post-content">{post.content}</p>
+
+        <div className="comment-prompt">
+          <h4>Leave a Comment...</h4>
+          <form action="http://localhost:3001/comments" method="POST" className="comment-form">
+            <textarea
+              onChange={(e) => handleTyping(e)}
+              placeholder='Leave a comment... (max: 500 chars)'
+              maxLength={500}
+              rows={5}
+              cols={50}>
+            </textarea>
+            <i>{500 - chars} characters remaining</i>
+            <button className='submit-comment'>Submit Comment</button>
+          </form>
+        </div>
+
         <div className="post-comments">
           <h4 className='comments-header'>Comments:</h4>
           {comments.map((comment) =>
