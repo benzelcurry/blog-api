@@ -1,7 +1,7 @@
 // Navbar component
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../stylesheets/Nav.css';
@@ -9,19 +9,37 @@ import '../stylesheets/Nav.css';
 const Nav = () => {
   const [user, setUser] = useState();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios.get(
       'http://localhost:3001/', 
       { withCredentials: true },
     )
-      .then((response) => {
-        console.log(response.data);
-        setUser(response.data.username);
-      })
+    .then((response) => {
+      // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
+      console.log(response.data);
+      setUser(response.data.username);
+    })
   }, [])
+
+  const handleClick = (e) => {
+    axios.get(
+      '/logout/',
+      { withCredentials: true },
+    )
+    .then((response) => {
+      navigate(0);
+    })
+  }
 
   return (
     <div className='header'>
+      {/* {
+        success ? 
+        <Navigate to='/' />
+        : null
+      } */}
       <div className="buttons">
         <Link to={'/'}>
           <button className="site-title">Ben's Blog</button>
@@ -38,7 +56,7 @@ const Nav = () => {
           user ? 
           <div className="user-buttons">
             <button>{user}</button>
-            <button>Log Out</button>
+            <button onClick={() => handleClick()}>Log Out</button>
           </div>
           :
           null
