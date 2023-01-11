@@ -43,3 +43,7 @@ button.site-title {
 .log-in {
   font-size: 16px;
 }
+
+.user-buttons {
+  display: flex;
+}

@@ -26,14 +26,22 @@ const Nav = () => {
         <Link to={'/'}>
           <button className="site-title">Ben's Blog</button>
         </Link>
-        <Link to={'/login'}>
-          <button className='log-in'>Log In</button>
-        </Link>
+        {
+          !user ?
+          <Link to={'/login'}>
+            <button className='log-in'>Log In</button>
+          </Link>
+          :
+          null
+        }
         {
           user ? 
-          <button>{user}</button>
+          <div className="user-buttons">
+            <button>{user}</button>
+            <button>Log Out</button>
+          </div>
           :
-          <button>Nope</button>
+          null
         }
       </div>
     </div>
