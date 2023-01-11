@@ -85,7 +85,11 @@ exports.login_user = (req, res, next) => {
       if (!results.user) {
         // No user with matching username found
         const err = new Error(`Username does not exist`);
-        err.status = 401;
+        // err.status = 401;
+        // return next(err);
+        res.json({
+          error: 'Username does not exist'
+        });
         return next(err);
       }
       bcrypt.compare(req.body.password, results.user.password, (err, isValid) => {
@@ -104,7 +108,10 @@ exports.login_user = (req, res, next) => {
             token,
           });
         } else {
-          res.status(401).json('Authentication Failed');
+          // res.status(401).json('Authentication Failed');
+          res.json({
+            error: 'Incorrect password'
+          });
         }
       })
     }

@@ -43,8 +43,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Verifies token and returns necessary info to client
 app.get('/', (req, res) => {
-  // res.json(req.cookies);
   if (req.cookies.token) {
     const decrypt = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
       res.json({
@@ -55,6 +55,13 @@ app.get('/', (req, res) => {
     res.json('');
   }
 })
+
+// Logs user out on GET
+app.get('/logout', (req, res) => {
+  res.clearCookie('token', { secure: false, httpOnly: true });
+  res.json('Success');
+});
+
 
 app.use('/', indexRouter);
 

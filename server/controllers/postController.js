@@ -24,7 +24,10 @@ exports.post_detail = (req, res, next) => {
         Post.findById(req.params.id).exec(callback);
       },
       post_comments(callback) {
-        Comment.find({ parent_post: req.params.id }).exec(callback);
+        Comment
+          .find({ parent_post: req.params.id })
+          .sort([['date_posted', 'descending']])
+          .exec(callback);
       },
     },
     (err, results) => {

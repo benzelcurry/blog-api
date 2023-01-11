@@ -33,7 +33,9 @@ exports.create_comment = [
     // Will probably want to edit to include meaningful content in the response
     comment.save((err) => {
       if (err) { return next(err) };
-      res.json('Comment successfully created');
+      res.json({
+        message: 'Successful'
+      });
     });
   },
 ];

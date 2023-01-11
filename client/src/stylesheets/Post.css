@@ -34,6 +34,13 @@
 
 .post-comments {
   margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comments-header {
+  margin-left: -30px;
 }
 
 .comment-prompt {
