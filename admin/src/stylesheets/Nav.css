@@ -1,0 +1,49 @@
+.header {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(133, 164, 204);
+  flex-shrink: 0;
+}
+
+.buttons {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  border: none;
+  height: 80px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  backdrop-filter: brightness(1.1);
+}
+
+a {
+  text-decoration: none;
+}
+
+button.site-title {
+  width: 300px;
+  font-size: 32px;
+  margin-left: auto;
+}
+
+.log-in {
+  font-size: 16px;
+}
+
+.user-buttons {
+  display: flex;
+}

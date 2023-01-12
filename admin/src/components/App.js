@@ -1,10 +1,16 @@
 import React from 'react';
 
+import Nav from './Nav';
+import Footer from './Footer';
 import '../stylesheets/App.css';
 
 const App = () => {
   return (
-    <div>Hello, Admin!</div>
+    <div className='page-container'>
+      <Nav />
+      <div className='app'>Hello, Admin!</div>
+      <Footer />
+    </div>
   );
 };
 
