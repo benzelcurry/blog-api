@@ -1,3 +1,29 @@
 .app {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.greeting {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.app button {
+  background-color: rgb(133, 164, 204);
+  border: solid 2px black;
+  border-radius: 5px;
+  height: 50px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.app button:hover {
+  filter: brightness(1.1);
+}
+
+.app button:active {
+  filter: brightness(1.3);
 }

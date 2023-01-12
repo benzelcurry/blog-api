@@ -8,6 +8,7 @@ import '../stylesheets/App.css';
 
 const App = () => {
   const [admin, setAdmin] = useState(false);
+  const [username, setUsername] = useState();
 
   useEffect(() => {
     axios.get(
@@ -16,7 +17,9 @@ const App = () => {
     )
     .then((response) => {
       if (response.data.admin === true) {
+        console.log('running...');
         setAdmin(response.data.admin);
+        setUsername(response.data.username);
       }
     })
   }, [])
@@ -26,7 +29,12 @@ const App = () => {
       <Nav />
       {
         admin ?
-        <div className='app'>Hello, Admin!</div>
+        <div className="app">
+          <h1 className='greeting'>Welcome to your admin dashboard, {username}!</h1>
+          {/* WILL NEED TO MAKE THESE BUTTONS LINK TO NEW PAGES */}
+          <button>Create New Post</button>
+          <button>View Old Posts</button>
+        </div>
         : <AccessDenied />
       }
       <Footer />
