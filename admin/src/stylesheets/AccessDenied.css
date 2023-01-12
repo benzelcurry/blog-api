@@ -1,0 +1,9 @@
+.access-denied {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: red;
+  height: 100%;
+}

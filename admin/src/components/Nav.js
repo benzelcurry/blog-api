@@ -17,7 +17,9 @@ const Nav = () => {
     .then((response) => {
       // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
       console.log(response.data);
-      setUser(response.data.username);
+      if (response.data.admin === true) {
+        setUser(response.data.username);
+      }
     })
   }, [])
 

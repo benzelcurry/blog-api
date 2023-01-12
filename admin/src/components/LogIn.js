@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import Nav from './Nav';
 import Footer from './Footer';
@@ -11,6 +11,8 @@ const LogIn = () => {
   const [password, setPassword] = useState();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState();
+
+  const navigate = useNavigate();
 
   const getToken = async (e) => {
     e.preventDefault();
@@ -25,8 +27,9 @@ const LogIn = () => {
     axios.post('/login', body)
       .then((response) => {
         if (response.data.message === 'Successful') {
-          // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
-          console.log(response);
+          if (!response.data.admin) {
+            return setError('Please sign in with an admin account');
+          }
           setSuccess(true);
         } else {
           setError(response.data.error);

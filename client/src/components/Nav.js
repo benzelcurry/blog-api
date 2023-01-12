@@ -35,11 +35,6 @@ const Nav = () => {
 
   return (
     <div className='header'>
-      {/* {
-        success ? 
-        <Navigate to='/' />
-        : null
-      } */}
       <div className="buttons">
         <Link to={'/'}>
           <button className="site-title">Ben's Blog</button>
