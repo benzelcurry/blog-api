@@ -96,7 +96,11 @@ exports.login_user = (req, res, next) => {
         if (isValid) {
           const secret = process.env.SECRET_KEY;
           const token = jwt.sign( 
-            { username: req.body.username, id: results.user._id },
+            { 
+              username: req.body.username, 
+              id: results.user._id,
+              admin: results.user.admin,
+            },
             secret, 
             { expiresIn: '30d' },
           );

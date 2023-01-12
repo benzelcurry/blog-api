@@ -50,6 +50,7 @@ app.get('/', (req, res) => {
       res.json({
         username: decrypt.username,
         id: decrypt.id,
+        admin: decrypt.admin,
       });
   } else {
     res.json('');
