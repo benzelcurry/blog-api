@@ -6,7 +6,7 @@ const PostSchema = new Schema ({
   title: { type: String, required: true, maxLength: 100 },
   content: { type: String, required: true, minLength: 1, maxLength: 10000 },
   date_posted: { type: Date, required: true },
-  // Might need to pull Author info in a more manual way, we'll see
+  updated: { type: Date, required: false },
   author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   published: { type: Boolean, required: false },
 });
