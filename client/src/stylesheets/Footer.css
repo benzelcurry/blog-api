@@ -7,3 +7,24 @@
   background-color: rgb(133, 164, 204);
   flex-shrink: 0;
 }
+
+.github {
+  height: 30px;
+}
+
+.personal-link {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  margin: 0 10px 0 10px;
+  gap: 5px;
+}
+
+.personal-link:hover {
+  color: #fff;
+}
+
+.personal-link:hover .github {
+  filter: invert(100%) sepia(0%) saturate(24%) hue-rotate(312deg) brightness(105%) contrast(105%);
+}
