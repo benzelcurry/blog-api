@@ -48,7 +48,7 @@ const Card = ({ users, post }) => {
       </div>
       <div className="card-author">{author}</div>
       <div className="card-content">{post.content}</div>
-      <Link to={ `/post/${post._id}` } state={myData} className='post-link'>
+      <Link to={ `/posts/${post._id}` } state={myData} className='post-link'>
         <i className='more-info'>
           <div>{comments}</div>
           <img src={Comment} alt='Comments' className='comment' />
