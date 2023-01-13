@@ -1,8 +1,10 @@
 // Old Posts component
 
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import Card from './Card';
+import AccessDenied from './AccessDenied';
 import Nav from './Nav';
 import Footer from './Footer';
 import '../stylesheets/Posts.css';
@@ -10,6 +12,7 @@ import '../stylesheets/Posts.css';
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [admin, setAdmin] = useState(false);
 
   // Fetches posts from server and stores them in state
   useEffect(() => {
@@ -29,15 +32,33 @@ const Posts = () => {
     });
   }, []);
 
+  // Checks to see if current user is an admin
+  useEffect(() => {
+    axios.get(
+      'http://localhost:3001/',
+      { withCredentials: true },
+    )
+    .then((response) => {
+      if (response.data.admin === true) {
+        console.log('running...');
+        setAdmin(response.data.admin);
+      }
+    })
+  }, [])
+
   return (
     // WILL WANT TO GATHER ICON .SVG'S FOR COMMENTS/WHOLE POST/ETC.
     <div className="app">
       <Nav />
-      <div className='posts'>
-        {posts.map((post) => 
-          <Card key={post._id} users={users} post={post} />  
-        )}
-      </div>
+      {
+        admin ?
+        <div className='posts'>
+          {posts.map((post) => 
+            <Card key={post._id} users={users} post={post} />  
+          )}
+        </div>
+        : <AccessDenied />
+      }
       <Footer />
     </div>
   );

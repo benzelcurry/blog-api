@@ -1,6 +1,8 @@
 const Comment = require('../models/comment');
 
+const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
+require('dotenv').config();
 
 exports.create_comment = [
   body('content')
@@ -39,3 +41,19 @@ exports.create_comment = [
     });
   },
 ];
+
+// Delete comment on DELETE request
+exports.delete_comment = (req, res, next) => {
+  const decrypt = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
+  const isAdmin = decrypt.admin;
+
+  if (isAdmin) {
+    Comment.findByIdAndRemove(req.body.commentID, (err) => {
+      if (err) { return res.json({ message: 'Error' }) };
+
+      res.json({ message: 'Success' });
+    });
+  } else {
+    res.json({ message: 'Error' });
+  }
+};

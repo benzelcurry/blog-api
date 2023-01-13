@@ -49,6 +49,9 @@ router.post('/users', user_controller.user_create_post);
 // POST request for creating new comment
 router.post('/comments', comment_controller.create_comment);
 
+// DELETE request for deleting comments (restricted to admins)
+router.delete('/comments', comment_controller.delete_comment);
+
 
 ///// LOG-IN ROUTE /////
 router.post('/login', user_controller.login_user);
