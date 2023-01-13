@@ -1,0 +1,52 @@
+.post-card {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  border: solid 3px black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-date {
+  align-self: center;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.card-author {
+  font-size: 1.2rem;
+}
+
+.card-content {
+  margin-top: 20px;
+}
+
+.comment {
+  height: 35px;
+  width: auto;
+}
+
+.more-info {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.post-link {
+  margin-top: auto;
+  align-self: flex-end;
+  text-decoration: none;
+  color: inherit;
+}

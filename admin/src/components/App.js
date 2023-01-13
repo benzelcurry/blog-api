@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Nav from './Nav';
@@ -33,7 +34,7 @@ const App = () => {
           <h1 className='greeting'>Welcome to your admin dashboard, {username}!</h1>
           {/* WILL NEED TO MAKE THESE BUTTONS LINK TO NEW PAGES */}
           <button>Create New Post</button>
-          <button>View Old Posts</button>
+          <Link to={'/posts'}><button>View Old Posts</button></Link>
         </div>
         : <AccessDenied />
       }
