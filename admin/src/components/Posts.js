@@ -47,8 +47,7 @@ const Posts = () => {
   }, [])
 
   return (
-    // WILL WANT TO GATHER ICON .SVG'S FOR COMMENTS/WHOLE POST/ETC.
-    <div className="app">
+    <div className="posts-container">
       <Nav />
       {
         admin ?
