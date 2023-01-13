@@ -48,10 +48,10 @@ exports.delete_comment = (req, res, next) => {
   const isAdmin = decrypt.admin;
 
   if (isAdmin) {
-    Comment.findByIdAndRemove(req.body.commentID, (err) => {
+    Comment.findByIdAndRemove(req.params.id, (err) => {
       if (err) { return res.json({ message: 'Error' }) };
 
-      res.json({ message: 'Success' });
+      res.json({ message: 'Successful' });
     });
   } else {
     res.json({ message: 'Error' });

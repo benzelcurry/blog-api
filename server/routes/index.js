@@ -50,7 +50,7 @@ router.post('/users', user_controller.user_create_post);
 router.post('/comments', comment_controller.create_comment);
 
 // DELETE request for deleting comments (restricted to admins)
-router.delete('/comments', comment_controller.delete_comment);
+router.delete('/comments/:id', comment_controller.delete_comment);
 
 
 ///// LOG-IN ROUTE /////
