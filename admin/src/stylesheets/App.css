@@ -11,7 +11,7 @@
   font-weight: bold;
 }
 
-.app button {
+.app .btn {
   background-color: rgb(133, 164, 204);
   border: solid 2px black;
   border-radius: 5px;
@@ -20,10 +20,10 @@
   cursor: pointer;
 }
 
-.app button:hover {
+.app .btn:hover {
   filter: brightness(1.1);
 }
 
-.app button:active {
+.app .btn:active {
   filter: brightness(1.3);
 }

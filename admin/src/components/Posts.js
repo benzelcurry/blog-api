@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import Nav from './Nav';
 import Footer from './Footer';
-import '../stylesheets/App.css';
+import '../stylesheets/Posts.css';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
