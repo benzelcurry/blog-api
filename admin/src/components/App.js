@@ -33,7 +33,7 @@ const App = () => {
         <div className="app">
           <h1 className='greeting'>Welcome to your admin dashboard, {username}!</h1>
           {/* WILL NEED TO MAKE THESE BUTTONS LINK TO NEW PAGES */}
-          <button className='btn'>Create New Post</button>
+          <Link to={'/new-post'}><button className='btn'>Create New Post</button></Link>
           <Link to={'/posts'}><button className='btn'>View Old Posts</button></Link>
         </div>
         : <AccessDenied />

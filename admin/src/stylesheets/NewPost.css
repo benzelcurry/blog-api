@@ -1,0 +1,11 @@
+.new-post-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.new-post {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
