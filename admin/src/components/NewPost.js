@@ -56,7 +56,7 @@ const NewPost = () => {
       if (response.data.errors) {
         return setError(response.data.errors[0].msg);
       }
-      navigate(0);
+      navigate('/posts');
     })
     .catch((err) => {
       throw new Error(err);
