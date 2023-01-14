@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .new-post form {
