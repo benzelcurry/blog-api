@@ -8,4 +8,49 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.new-post form {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form {
+  width: 600px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: repeat(1fr auto);
+}
+
+.create-btn {
+  align-self: center;
+  width: 300px;
+  margin-top: 50px;
+  background-color: rgb(133, 164, 204);
+  border: solid 2px black;
+  border-radius: 5px;
+  height: 50px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.create-btn:hover {
+  filter: brightness(1.1);
+}
+
+.create-btn:active {
+  filter: brightness(1.3);
+}
+
+.post-contents {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-contents textarea {
+  font-family: inherit;
+  height: 400px;
 }
