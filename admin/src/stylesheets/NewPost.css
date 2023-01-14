@@ -29,7 +29,7 @@
 .create-btn {
   align-self: center;
   width: 300px;
-  margin-top: 50px;
+  margin-top: 30px;
   background-color: rgb(133, 164, 204);
   border: solid 2px black;
   border-radius: 5px;
@@ -54,4 +54,10 @@
 .post-contents textarea {
   font-family: inherit;
   height: 400px;
+}
+
+.error-msg {
+  align-self: center;
+  color: red;
+  margin-top: 30px;
 }
