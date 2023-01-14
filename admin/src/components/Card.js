@@ -6,6 +6,7 @@ import { DateTime } from 'luxon';
 
 import '../stylesheets/Card.css';
 import Comment from '../images/comment.svg';
+import Edit from '../images/edit.svg';
 
 const Card = ({ users, post }) => {
   const [author, setAuthor] = useState();
@@ -48,12 +49,19 @@ const Card = ({ users, post }) => {
       </div>
       <div className="card-author">{author}</div>
       <div className="card-content">{post.content}</div>
-      <Link to={ `/posts/${post._id}` } state={myData} className='post-link'>
-        <i className='more-info'>
-          <div>{comments}</div>
-          <img src={Comment} alt='Comments' className='comment' />
-        </i>
-      </Link>
+      <div className="card-options">
+        <Link to={ '/update-post' } className='post-link'>
+          <i className='edit-post'>
+            <img src={Edit} alt="Edit" className='edit' />
+          </i>
+        </Link>
+        <Link to={ `/posts/${post._id}` } state={myData} className='post-link'>
+          <i className='more-info'>
+            <div>{comments}</div>
+            <img src={Comment} alt='Comments' className='comment' />
+          </i>
+        </Link>
+      </div>
     </div>
   );
 };

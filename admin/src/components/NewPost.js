@@ -30,8 +30,6 @@ const NewPost = () => {
     )
     .then((response) => {
       if (response.data.admin === true) {
-        console.log('running...');
-        console.log(response.data);
         setUser(response.data);
       }
     })
@@ -74,7 +72,7 @@ const NewPost = () => {
             <div className="post-form">
               <label htmlFor="title">Title: </label>
               <input type="text" name="title" id="title" 
-                placeholder="Title (max length: 100 chars)" 
+                placeholder="Title (max length: 100 chars)"
                 onChange={(e) => handleTitle(e)} maxLength={100} />
               <label htmlFor="content">Post Content: </label>
               <div className="post-contents">

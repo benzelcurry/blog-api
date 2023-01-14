@@ -16,6 +16,7 @@ const RouteSwitch = () => {
         <Route path='/posts' element={ <Posts /> } />
         <Route path='/posts/:id' element={ <PostDetail /> } />
         <Route path='/new-post' element={ <NewPost /> } />
+        <Route path='/update-post' element={ <NewPost /> } />
       </Routes>
     </HashRouter>
   );
