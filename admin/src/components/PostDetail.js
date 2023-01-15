@@ -31,7 +31,7 @@ const PostDetail = () => {
 
     // Checks for infinite rendering; delete before deployment
     console.log('infinite post check');
-  }, [myData.author, id]);
+  }, [id]);
 
   useEffect(() => {
     axios.get(
@@ -78,7 +78,7 @@ const PostDetail = () => {
         admin ?
         <div className='post'>
           <h1 className="post-title">{post.title}</h1>
-          <h3 className="post-author">{myData.author}</h3>
+          <h3 className="post-author">{post.author}</h3>
           <h4 className="post-date">
             {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
           </h4>

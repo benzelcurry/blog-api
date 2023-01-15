@@ -71,6 +71,32 @@ const NewPost = () => {
     });
   };
 
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    if (title.length === 0) {
+      return setError('Please enter a title for your post before submitting.');
+    }
+    if (content.length === 0) {
+      return setError('Please enter a body for your post before submitting.');
+    }
+    const body = { title: title, content: content, userID: user.id, updated: new Date() };
+    axios.put(
+      `http://localhost:3001/posts/${post._id}`,
+      body,
+      { withCredentials: true },
+    )
+    .then((response) => {
+      console.log(response);
+      if (response.data.errors) {
+        return setError(response.data.errors[0].msg);
+      }
+      navigate(`/posts/${post._id}`);
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
+  };
+
   return (
     <div className="new-post-container">
       <Nav />
@@ -102,7 +128,10 @@ const NewPost = () => {
               <p className='error-msg'>{error}</p>
               : null
             }
-            <button className='create-btn' onClick={(e) => handleSubmit(e)}>Create Post</button>
+            <button className='create-btn' 
+              onClick={ post ? (e) => handleUpdate(e) : (e) => handleSubmit(e)}>
+                Create Post
+            </button>
           </form>
         </div>
         : <AccessDenied />
