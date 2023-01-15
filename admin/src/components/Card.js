@@ -50,7 +50,7 @@ const Card = ({ users, post }) => {
       <div className="card-author">{author}</div>
       <div className="card-content">{post.content}</div>
       <div className="card-options">
-        <Link to={ '/update-post' } className='post-link'>
+        <Link to={ '/update-post' } state={{ post: post }} className='post-link'>
           <i className='edit-post'>
             <img src={Edit} alt="Edit" className='edit' />
           </i>

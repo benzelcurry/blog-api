@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import Nav from './Nav';
@@ -12,8 +12,10 @@ const NewPost = () => {
   const [title, setTitle] = useState('');
   const [user, setUser] = useState({});
   const [error, setError] = useState('');
+  const [post, setPost] = useState(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -22,6 +24,14 @@ const NewPost = () => {
   const handleTyping = (e) => {
     setContent(e.target.value);
   };
+
+  useEffect(() => {
+    if (location.state) {
+      setPost(location.state.post);
+      setContent(location.state.post.content);
+    }
+    console.log('testing');
+  }, [location.state])
 
   useEffect(() => {
     axios.get(
@@ -72,6 +82,7 @@ const NewPost = () => {
             <div className="post-form">
               <label htmlFor="title">Title: </label>
               <input type="text" name="title" id="title" 
+                defaultValue={ post ? post.title : '' }
                 placeholder="Title (max length: 100 chars)"
                 onChange={(e) => handleTitle(e)} maxLength={100} />
               <label htmlFor="content">Post Content: </label>
@@ -80,6 +91,7 @@ const NewPost = () => {
                   placeholder='Write your post body here...'
                   name="content" id="content"
                   maxLength={10000}
+                  defaultValue={ post ? post.content : '' }
                   onChange={(e) => handleTyping(e)}>
                 </textarea>
                 <i>{10000 - content.length} characters remaining</i>
