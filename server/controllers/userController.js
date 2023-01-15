@@ -39,34 +39,49 @@ exports.user_create_post = [
     .withMessage('Passwords must match'),
 
   // Process request after validation
+
+  // MAKE SURE LINES 44 THRU 55 WORK FOR CHECKING EXISTING USERNAMES; ELSE, DELETE
   (req, res, next) => {
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-      if (err) { return next(err) };
-
-      const errors = validationResult(req);
-
-      const user = new User({
-        username: req.body.username,
-        password: hashedPassword,
-        account_created: new Date(),
-        admin: false,
-      });
-
-      if (!errors.isEmpty()) {
-        // Might need to update this to properly send errors to client
+    async.parallel({
+      user(callback) {
+        User.find({ username: req.body.username }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (results.user) {
         res.json({
-          errors: errors.array(),
-        });
-        return;
+          errors: ['Username already exists']
+        })
       }
 
-      user.save((err) => {
+      bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if (err) { return next(err) };
-        // Might want to modify this once client is up and running
-        res.json('Account successfully created.');
-      });
-    });
-  },
+
+        const errors = validationResult(req);
+
+        const user = new User({
+          username: req.body.username,
+          password: hashedPassword,
+          account_created: new Date(),
+          admin: false,
+        });
+
+        if (!errors.isEmpty()) {
+          // Might need to update this to properly send errors to client
+          res.json({
+            errors: errors.array(),
+          });
+          return;
+        }
+
+        user.save((err) => {
+          if (err) { return next(err) };
+          // Might want to modify this once client is up and running
+          res.json('Account successfully created.');
+        });
+      },
+    )}
+  )}
 ];
 
 // Handle User login on POST
