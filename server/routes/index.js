@@ -33,6 +33,9 @@ router.post('/posts', post_controller.create_post);
 // GET request for blog post details
 router.get('/posts/:id', post_controller.post_detail);
 
+// PUT request for updating blog post
+router.put('/posts/:id', post_controller.update_post);
+
 
 ///// USER ROUTES /////
 
