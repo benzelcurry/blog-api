@@ -128,7 +128,7 @@ const PostDetail = () => {
           <div className="post-comments">
             <h4 className='comments-header'>Comments:</h4>
             {comments.map((comment) =>
-              <Comment key={comment._id} comment={comment} author={myData.author} />
+              <Comment key={comment._id} comment={comment} author={author} />
             )}
           </div>
         </div>
