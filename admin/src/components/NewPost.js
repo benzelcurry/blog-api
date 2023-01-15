@@ -1,3 +1,5 @@
+// Component for creating/updating blog posts
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -17,22 +19,26 @@ const NewPost = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Handles input change on title field
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
 
+  // Handles input change on content field
   const handleTyping = (e) => {
     setContent(e.target.value);
   };
 
+  // Sets state for post-related data if page is loaded for a post update
   useEffect(() => {
     if (location.state) {
       setPost(location.state.post);
+      setTitle(location.state.post.title);
       setContent(location.state.post.content);
     }
-    console.log('testing');
   }, [location.state])
 
+  // Sets current user data if they're an admin
   useEffect(() => {
     axios.get(
       'http://localhost:3001/',
@@ -45,6 +51,7 @@ const NewPost = () => {
     })
   }, [])
 
+  // Handles submitting and saving *new* post on POST
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title.length === 0) {
@@ -60,7 +67,6 @@ const NewPost = () => {
       { withCredentials: true }
     )
     .then((response) => {
-      console.log(response);
       if (response.data.errors) {
         return setError(response.data.errors[0].msg);
       }
@@ -71,6 +77,7 @@ const NewPost = () => {
     });
   };
 
+  // Handles updating *old* post on PUT
   const handleUpdate = (e) => {
     e.preventDefault();
     if (title.length === 0) {
@@ -86,7 +93,6 @@ const NewPost = () => {
       { withCredentials: true },
     )
     .then((response) => {
-      console.log(response);
       if (response.data.errors) {
         return setError(response.data.errors[0].msg);
       }

@@ -1,3 +1,5 @@
+// Displays individual blog posts and handles adding comments
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { DateTime } from 'luxon';
@@ -12,6 +14,8 @@ import '../stylesheets/PostDetail.css';
 const PostDetail = () => {
   const { id } = useParams();
   const [user, setUser] = useState();
+  const [users, setUsers] = useState([]);
+  const [author, setAuthor] = useState();
   const [admin, setAdmin] = useState(false);
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
@@ -28,28 +32,47 @@ const PostDetail = () => {
       setPost(data.post);
       setComments(data.comments);
     });
-
-    // Checks for infinite rendering; delete before deployment
-    console.log('infinite post check');
   }, [id]);
 
+  // Gets current logged in user data
   useEffect(() => {
     axios.get(
       'http://localhost:3001/', 
       { withCredentials: true },
     )
     .then((response) => {
-      // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
-      console.log(response.data);
       setUser(response.data.id);
       setAdmin(response.data.admin);
     })
   }, [])
 
+  // Fetches users from server and stores them in state
+  useEffect(() => {
+    fetch('http://localhost:3001/users')
+    .then((response) => response.json())
+    .then((data) => {
+      setUsers(data.user_list);
+    });
+  }, []);
+
+  // Gets username of post author
+  useEffect(() => {
+    const displayAuthor = (author) => {
+      if (users.length > 0) {
+        const result = users.find(user => user._id === author);
+        return result.username;
+      }
+    };
+
+    setAuthor(displayAuthor(post.author));
+  }, [post.author, users]);
+
+  // Handles input for comments
   const handleTyping = (e) => {
     setContent(e.target.value);
   }
 
+  // Handles submitting new comments on POST
   const postComment = async (e) => {
     e.preventDefault();
     if (content.length === 0) {
@@ -59,8 +82,6 @@ const PostDetail = () => {
     axios.post('/comments', body)
       .then((response) => {
         if (response.data.message === 'Successful') {
-          // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
-          console.log(response);
           navigate(0);
         } else {
           setError(response.data.errors[0].msg);
@@ -78,7 +99,7 @@ const PostDetail = () => {
         admin ?
         <div className='post'>
           <h1 className="post-title">{post.title}</h1>
-          <h3 className="post-author">{post.author}</h3>
+          <h3 className="post-author">{author}</h3>
           <h4 className="post-date">
             {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
           </h4>

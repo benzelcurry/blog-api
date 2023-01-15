@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const User = require('../models/user');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');
@@ -41,6 +42,7 @@ exports.post_detail = (req, res, next) => {
         err.status = 404;
         return next(err);
       }
+
       // Successful, so return necessary data
       res.json({
         post: results.post,
@@ -116,9 +118,9 @@ exports.update_post = [
 
     // Might need to change how author info is grabbed once client is built
     const post = new Post({
+      _id: req.params.id,
       title: req.body.title,
       content: req.body.content,
-      date_posted: new Date(),
       author: req.body.userID,
       updated: req.body.updated,
       published: true,
