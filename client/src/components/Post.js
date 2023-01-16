@@ -26,9 +26,6 @@ const Post = () => {
       setPost(data.post);
       setComments(data.comments);
     });
-
-    // Checks for infinite rendering; delete before deployment
-    console.log('infinite post check');
   }, [myData.author, id]);
 
   useEffect(() => {
@@ -37,8 +34,6 @@ const Post = () => {
       { withCredentials: true },
     )
     .then((response) => {
-      // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
-      console.log(response.data);
       setUser(response.data.id);
     })
   }, [])
@@ -56,8 +51,6 @@ const Post = () => {
     axios.post('/comments', body)
       .then((response) => {
         if (response.data.message === 'Successful') {
-          // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
-          console.log(response);
           navigate(0);
         } else {
           setError(response.data.errors[0].msg);
