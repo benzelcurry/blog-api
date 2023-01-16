@@ -10,6 +10,7 @@ const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confPass, setConfPass] = useState('');
+  const [error, setError] = useState('');
 
   const handleUser = (e) => {
     setUsername(e.target.value);
@@ -25,6 +26,12 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (username.length === 0) {
+      return setError('Please enter a username before submitting.');
+    };
+    if (password.length === 0 || confPass.length === 0) {
+      return setError('Please ensure password fields are both filled out before submitting.');
+    };
     const body = { username: username, password: password, confirm_password: confPass };
     axios.post('/users', body)
   }
@@ -49,6 +56,11 @@ const SignUp = () => {
             />
           </div>
           <button className='signup-btn'>Submit</button>
+          {
+            error ? 
+            <p className='signup-error'>{error}</p>
+            : null
+          }
         </form>
       </div>
       <Footer />
