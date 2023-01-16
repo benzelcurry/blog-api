@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,6 +11,8 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confPass, setConfPass] = useState('');
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleUser = (e) => {
     setUsername(e.target.value);
@@ -33,8 +35,27 @@ const SignUp = () => {
       return setError('Please ensure password fields are both filled out before submitting.');
     };
     const body = { username: username, password: password, confirm_password: confPass };
-    axios.post('/users', body)
-  }
+    axios.post('/users', body, { withCredentials: true })
+      .then((response) => {
+        if (response.data.errors) {
+          return setError(response.data.errors[0].msg);
+        }
+        axios.post('/login', body)
+          .then((response) => {
+            if (response.data.message === 'Successful') {
+              navigate('/');
+            } else {
+              setError(response.data.error);
+            }
+          })
+          .catch((err) => {
+            throw new Error(err);
+          });
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
 
   return (
     <div className="signup">
@@ -55,7 +76,7 @@ const SignUp = () => {
               onChange={(e) => handleConf(e)}
             />
           </div>
-          <button className='signup-btn'>Submit</button>
+          <button className='signup-btn' onClick={(e) => handleSubmit(e)}>Submit</button>
           {
             error ? 
             <p className='signup-error'>{error}</p>
