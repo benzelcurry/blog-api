@@ -41,9 +41,14 @@ const Nav = () => {
         </Link>
         {
           !user ?
-          <Link to={'/login'}>
-            <button className='log-in'>Log In</button>
-          </Link>
+          <div className="not-logged">
+            <Link to={'/login'}>
+              <button className='log-in'>Log In</button>
+            </Link>
+            <Link to={'/signup'}>
+              <button className='sign-up'>Sign Up</button>
+            </Link>
+          </div>
           :
           null
         }

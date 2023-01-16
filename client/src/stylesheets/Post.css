@@ -1,13 +1,7 @@
-.blog-post {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-}
-
 .post {
   display: flex;
   flex-direction: column;
+  align-self: center;
   width: 600px;
   height: 100%;
   padding: 40px;

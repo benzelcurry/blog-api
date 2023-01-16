@@ -1,9 +1,3 @@
-.login-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .login-body {
   height: 100%;
   display: flex;

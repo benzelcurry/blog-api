@@ -40,10 +40,15 @@ button.site-title {
   margin-left: auto;
 }
 
-.log-in {
+.log-in,
+.sign-up {
   font-size: 16px;
 }
 
 .user-buttons {
+  display: flex;
+}
+
+.not-logged {
   display: flex;
 }
