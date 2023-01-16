@@ -1,10 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import Nav from './Nav';
 import Footer from './Footer';
 import '../stylesheets/SignUp.css';
 
 const SignUp = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confPass, setConfPass] = useState('');
+
+  const handleUser = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePass = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConf = (e) => {
+    setConfPass(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const body = { username: username, password: password, confirm_password: confPass };
+    axios.post('/users', body)
+  }
+
   return (
     <div className="signup">
       <Nav />
@@ -12,11 +36,17 @@ const SignUp = () => {
         <form action="http://localhost:3001/users" method="POST" className='signup-form'>
           <div className="form-inputs">
             <label htmlFor="username">Username: </label>
-            <input type="text" name="username" id="username" placeholder="Username" />
+            <input type="text" name="username" id="username" placeholder="Username" 
+              onChange={(e) => handleUser(e)} 
+            />
             <label htmlFor="password">Password: </label>
-            <input type="password" name="password" id="password" placeholder="Password" />
+            <input type="password" name="password" id="password" placeholder="Password" 
+              onChange={(e) => handlePass(e)}
+            />
             <label htmlFor="confirm_password">Confirm Password: </label>
-            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" />
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" 
+              onChange={(e) => handleConf(e)}
+            />
           </div>
           <button className='signup-btn'>Submit</button>
         </form>
