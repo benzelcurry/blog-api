@@ -44,12 +44,12 @@ exports.user_create_post = [
   (req, res, next) => {
     async.parallel({
       user(callback) {
-        User.find({ username: req.body.username }).exec(callback);
+        User.findOne({ username: req.body.username }).exec(callback);
       },
     },
     (err, results) => {
       if (results.user) {
-        res.json({
+        return res.json({
           errors: ['Username already exists']
         })
       }

@@ -37,23 +37,23 @@ const SignUp = () => {
     const body = { username: username, password: password, confirm_password: confPass };
     axios.post('/users', body, { withCredentials: true })
       .then((response) => {
+        console.log(response);
         if (response.data.errors) {
-          return setError(response.data.errors[0].msg);
+          if (typeof response.data.errors[0] === 'object') {
+            return setError(response.data.errors[0].msg);
+          } else {
+            return setError(response.data.errors[0]);
+          }
         }
-        axios.post('/login', body)
+        axios.post('/login', { username: username, password: password })
           .then((response) => {
             if (response.data.message === 'Successful') {
               navigate('/');
-            } else {
-              setError(response.data.error);
             }
           })
           .catch((err) => {
             throw new Error(err);
           });
-      })
-      .catch((err) => {
-        throw new Error(err);
       });
   };
 
