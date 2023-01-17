@@ -12,6 +12,7 @@ Technologies
 
 Features
 * Two separate React front ends; one for regular users and one for admins
+* Both front ends are responsive on mobile
 * Persistent user log-in verification
 * Back end and front end form sanitization and verification
 * Ability to create accounts
