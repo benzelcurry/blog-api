@@ -58,7 +58,9 @@ const PostDetail = () => {
     const displayAuthor = (author) => {
       if (users.length > 0) {
         const result = users.find(user => user._id === author);
-        return result.username;
+        if (result) {
+          return result.username;
+        }
       }
     };
 
