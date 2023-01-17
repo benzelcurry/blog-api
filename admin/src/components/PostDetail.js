@@ -1,7 +1,7 @@
 // Displays individual blog posts and handles adding comments
 
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import axios from 'axios';
 
@@ -21,8 +21,6 @@ const PostDetail = () => {
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState('');
   const [error, setError] = useState();
-  const location = useLocation();
-  const myData = location.state;
   const navigate = useNavigate();
 
   useEffect(() => {

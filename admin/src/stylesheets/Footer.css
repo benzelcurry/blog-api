@@ -4,12 +4,15 @@
   align-items: center;
   height: 80px;
   width: 100%;
-  background-color: rgb(133, 164, 204);
+  background-color: rgb(64, 70, 77);
+  color: rgb(238, 228, 187);
   flex-shrink: 0;
 }
 
 .github {
   height: 30px;
+  filter: invert(89%) sepia(16%) saturate(444%) hue-rotate(5deg) brightness(104%) contrast(87%);
+
 }
 
 .personal-link {
