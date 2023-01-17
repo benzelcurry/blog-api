@@ -53,3 +53,9 @@ button.site-title {
 .not-logged {
   display: flex;
 }
+
+@media (max-width: 500px) {
+  button.site-title {
+    width: auto;
+  }
+}
