@@ -30,7 +30,6 @@ const App = () => {
   }, []);
 
   return (
-    // WILL WANT TO GATHER ICON .SVG'S FOR COMMENTS/WHOLE POST/ETC.
     <div className="app">
       <Nav />
       <div className='posts'>
