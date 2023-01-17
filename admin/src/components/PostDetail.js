@@ -98,12 +98,14 @@ const PostDetail = () => {
       {
         admin ?
         <div className='post'>
-          <h1 className="post-title">{post.title}</h1>
-          <h3 className="post-author">{author}</h3>
-          <h4 className="post-date">
-            {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
-          </h4>
-          <p className="post-content">{post.content}</p>
+          <div className="post-details">
+            <h1 className="post-title">{post.title}</h1>
+            <h3 className="post-author">{author}</h3>
+            <h4 className="post-date">
+              {DateTime.fromISO(post.date_posted).toLocaleString(DateTime.DATE_MED)}
+            </h4>
+            <p className="post-content">{post.content}</p>
+          </div>
 
           <div className="comment-prompt">
             <h4>Leave a Comment...</h4>
