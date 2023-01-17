@@ -10,7 +10,7 @@ const Footer = () => {
       <a href="https://github.com/benzelcurry" className='personal-link' target='_blank' rel='noreferrer noopener'>
       <i><img src={Github} alt="GitHub" className='github' /></i>
       benzelcurry</a> 
-      2022
+      2023
     </div>
   );
 };

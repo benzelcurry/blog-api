@@ -6,6 +6,13 @@
   border: solid 3px black;
   border-radius: 10px;
   padding: 20px;
+  background-color: rgb(170, 180, 192);
+  transition: height 0.5s, width 0.5s;
+}
+
+.post-card:hover {
+  height: 350px;
+  width: 350px;
 }
 
 .card-title {
@@ -35,6 +42,10 @@
 .comment {
   height: 35px;
   width: auto;
+}
+
+.comment:hover {
+  filter: invert(88%) sepia(29%) saturate(230%) hue-rotate(8deg) brightness(99%) contrast(93%);
 }
 
 .more-info {

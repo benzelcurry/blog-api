@@ -22,5 +22,5 @@ code {
 #root > div {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  background-color: rgb(93, 104, 117);
 }
