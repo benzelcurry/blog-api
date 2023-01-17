@@ -62,3 +62,10 @@
   text-decoration: none;
   color: inherit;
 }
+
+@media (max-width: 500px) {
+  .post-card:hover {
+    width: 300px;
+    height: 300px;
+  }
+}

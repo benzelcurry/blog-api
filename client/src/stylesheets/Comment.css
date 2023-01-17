@@ -18,3 +18,18 @@
   width: 320px;
   padding: 10px;
 }
+
+@media (max-width: 500px) {
+  .comment-container {
+    width: 300px;
+    padding: 20px;
+  }
+
+  .comment-header {
+    margin-left: 0;
+  }
+
+  .comment-content {
+    width: 300px;
+  }
+}

@@ -68,3 +68,30 @@
   width: 160px;
   align-self: center;
 }
+
+@media (max-width: 500px) {
+  .post {
+    width: 320px;
+  }
+
+  .post-details {
+    width: 300px;
+    padding: 20px;
+  }
+
+  .comment-prompt {
+    width: 320px;
+  }
+
+  .comment-form {
+    width: 320px;
+  }
+
+  .comments-header {
+    margin-left: 0px;
+  }
+
+  .post-comments {
+    margin-left: 0;
+  }
+}
