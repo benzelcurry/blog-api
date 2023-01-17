@@ -28,3 +28,9 @@
 .app .btn:active {
   filter: brightness(1.3);
 }
+
+@media (max-width: 500px) {
+  .greeting {
+    text-align: center;
+  }
+}
