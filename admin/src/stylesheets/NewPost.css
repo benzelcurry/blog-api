@@ -1,7 +1,5 @@
 .new-post-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  align-items: center;
 }
 
 .new-post {
@@ -60,4 +58,32 @@
   align-self: center;
   color: red;
   margin-top: 30px;
+}
+
+@media (max-width: 500px) {
+  .new-post {
+    width: 320px;
+  }
+
+  .post-form {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-form > label {
+    display: none;
+  }
+
+  .post-form > input {
+    width: 320px;
+  }
+
+  .post-contents {
+    width: 320px;
+  }
+
+  .post-contents > textarea {
+    width: 320px;
+  }
 }
