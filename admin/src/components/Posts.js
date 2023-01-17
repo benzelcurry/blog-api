@@ -40,7 +40,6 @@ const Posts = () => {
     )
     .then((response) => {
       if (response.data.admin === true) {
-        console.log('running...');
         setAdmin(response.data.admin);
       }
     })

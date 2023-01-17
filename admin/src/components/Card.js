@@ -20,9 +20,6 @@ const Card = ({ users, post }) => {
     .then((data) => {
       setComments(data.total_comments)
     });
-
-    // Checking for infinite rendering; delete before deployment
-    console.log('Total comments hook');
   }, [comments, post._id]);
 
   // Gets username of post author
@@ -33,9 +30,6 @@ const Card = ({ users, post }) => {
         return result.username;
       }
     };
-
-    // console.log for checking for infinite rendering; delete before deployment
-    console.log('Card hook');
     setAuthor(displayAuthor(post.author));
   }, [post.author, users]);
 

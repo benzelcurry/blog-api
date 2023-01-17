@@ -15,8 +15,6 @@ const Nav = () => {
       { withCredentials: true },
     )
     .then((response) => {
-      // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
-      console.log(response.data);
       if (response.data.admin === true) {
         setUser(response.data.username);
       }
