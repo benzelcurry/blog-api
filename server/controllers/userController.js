@@ -120,7 +120,7 @@ exports.login_user = (req, res, next) => {
             { expiresIn: '30d' },
           );
 
-          res.cookie('token', token, { secure: false, httpOnly: true });
+          res.cookie('token', token, { secure: false, sameSite: 'none', httpOnly: true });
 
           return res.status(200).json({
             message: 'Successful',
