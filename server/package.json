@@ -1,6 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=16.17.0"
+  },
+  "private": true,
   "description": "Node server for Blog API web app",
   "main": "app.js",
   "scripts": {
