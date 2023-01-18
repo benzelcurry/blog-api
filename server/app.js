@@ -48,7 +48,7 @@ app.use(bodyParser.json());
 
 // Verifies token and returns necessary info to client
 app.get('/', (req, res) => {
-  if (req.cookies.token) {
+  if (req.body.token) {
     const decrypt = jwt.verify(req.body.token, process.env.SECRET_KEY);
       res.json({
         username: decrypt.username,
