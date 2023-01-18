@@ -24,6 +24,16 @@ db.on('error', console.error.bind(console, 'mongo connection error'));
 const app = express();
 
 app.use(cors({ credentials: true }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", req.header('Origin'));
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  next();
+});
 app.use(helmet());
 app.use(compression());
 app.use(cookieParser());
