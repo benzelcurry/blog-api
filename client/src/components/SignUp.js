@@ -35,7 +35,7 @@ const SignUp = () => {
       return setError('Please ensure password fields are both filled out before submitting.');
     };
     const body = { username: username, password: password, confirm_password: confPass };
-    axios.post('/users', body, { withCredentials: true })
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/users`, body)
       .then((response) => {
         console.log(response);
         if (response.data.errors) {
@@ -45,7 +45,7 @@ const SignUp = () => {
             return setError(response.data.errors[0]);
           }
         }
-        axios.post('/login', { username: username, password: password })
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, { username: username, password: password })
           .then((response) => {
             if (response.data.message === 'Successful') {
               navigate('/');

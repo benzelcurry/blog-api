@@ -13,7 +13,7 @@ const App = () => {
 
   // Fetches posts from server and stores them in state
   useEffect(() => {
-    fetch('http://localhost:3001/posts')
+    fetch(`${process.env.REACT_APP_SERVER_URL}/posts`)
     .then((response) => response.json())
     .then((data) => {
       setPosts(data.post_list);
@@ -22,7 +22,7 @@ const App = () => {
 
   // Fetches users from server and stores them in state
   useEffect(() => {
-    fetch('http://localhost:3001/users')
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users`)
     .then((response) => response.json())
     .then((data) => {
       setUsers(data.user_list);

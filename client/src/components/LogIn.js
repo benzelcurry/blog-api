@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { useGlobalState } from '../state';
 
 import Nav from './Nav';
 import Footer from './Footer';
@@ -11,6 +12,7 @@ const LogIn = () => {
   const [password, setPassword] = useState();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState();
+  const [token, setToken] = useGlobalState('token');
 
   const getToken = async (e) => {
     e.preventDefault();
@@ -22,11 +24,13 @@ const LogIn = () => {
       return setError('Please enter a password');
     }
     const body = { username: username, password: password };
-    axios.post('/login', body)
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, body)
       .then((response) => {
         if (response.data.message === 'Successful') {
           // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
           console.log(response);
+          setToken(response.data.token);
+          window.sessionStorage.setItem('token', response.data.token);
           setSuccess(true);
         } else {
           setError(response.data.error);
