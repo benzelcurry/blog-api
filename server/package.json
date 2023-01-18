@@ -32,6 +32,7 @@
     "nodemon": "^2.0.20",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
-    "railway": "^2.0.17"
+    "railway": "^2.0.17",
+    "react-hooks-global-state": "^2.1.0"
   }
 }
