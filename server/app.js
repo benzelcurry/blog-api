@@ -34,7 +34,7 @@ app.use(cookieParser());
 // }));
 // app.use(verifyToken);
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Verifies token and returns necessary info to client
@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
         admin: decrypt.admin,
       });
   } else {
-    res.json('');
+    res.json('No current user.');
   }
 })
 
