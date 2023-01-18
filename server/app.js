@@ -37,12 +37,12 @@ app.use(function(req, res, next) {
 app.use(helmet());
 app.use(compression());
 app.use(cookieParser());
-// app.use(jwt({
-//   secret: process.env.SECRET_KEY,
-//   algorithms: ['HS256'],
-//   getToken: req => req.cookies.token
-// }));
-// app.use(verifyToken);
+app.use(jwt({
+  secret: process.env.SECRET_KEY,
+  algorithms: ['HS256'],
+  getToken: req => req.cookies.token
+}));
+app.use(verifyToken);
 app.use(express.urlencoded({ extended: false }));
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
