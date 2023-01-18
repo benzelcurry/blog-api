@@ -47,9 +47,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Verifies token and returns necessary info to client
-app.get('/', (req, res) => {
-  if (req.params.token) {
-    const decrypt = jwt.verify(req.params.token, process.env.SECRET_KEY);
+app.post('/', (req, res) => {
+  if (req.body.token) {
+    const decrypt = jwt.verify(req.body.token, process.env.SECRET_KEY);
       res.json({
         username: decrypt.username,
         id: decrypt.id,
