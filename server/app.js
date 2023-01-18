@@ -23,13 +23,7 @@ db.on('error', console.error.bind(console, 'mongo connection error'));
 
 const app = express();
 
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:3001',
-  ],
-  credentials: true,
-}));
+app.use(cors({ credentials: true }));
 app.use(helmet());
 app.use(compression());
 app.use(cookieParser());
