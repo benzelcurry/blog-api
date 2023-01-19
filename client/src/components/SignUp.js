@@ -48,6 +48,7 @@ const SignUp = () => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, { username: username, password: password })
           .then((response) => {
             if (response.data.message === 'Successful') {
+              window.sessionStorage.setItem('token', response.data.token);    
               navigate('/');
             }
           })
