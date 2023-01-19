@@ -24,12 +24,13 @@ const LogIn = () => {
       return setError('Please enter a password');
     }
     const body = { username: username, password: password };
-    axios.post('/login', body)
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, body)
       .then((response) => {
         if (response.data.message === 'Successful') {
           if (!response.data.admin) {
             return setError('Please sign in with an admin account');
           }
+          window.sessionStorage.setItem('token', response.data.token);
           setSuccess(true);
         } else {
           setError(response.data.error);

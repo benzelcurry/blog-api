@@ -6,14 +6,13 @@ import '../stylesheets/Nav.css';
 
 const Nav = () => {
   const [user, setUser] = useState();
+  const token = sessionStorage.getItem('token');
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(
-      'http://localhost:3001/',
-      { withCredentials: true },
-    )
+    const body = { token: sessionStorage.getItem('token') }
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
     .then((response) => {
       if (response.data.admin === true) {
         setUser(response.data.username);
@@ -22,13 +21,8 @@ const Nav = () => {
   }, [])
 
   const handleClick = (e) => {
-    axios.get(
-      '/logout/',
-      { withCredentials: true },
-    )
-    .then((response) => {
-      navigate(0);
-    })
+    sessionStorage.clear();
+    navigate(0);
   }
 
   return (
