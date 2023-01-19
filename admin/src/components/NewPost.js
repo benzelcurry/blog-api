@@ -39,11 +39,21 @@ const NewPost = () => {
   }, [location.state])
 
   // Sets current user data if they're an admin
+  // useEffect(() => {
+  //   axios.get(
+  //     'http://localhost:3001/',
+  //     { withCredentials: true },
+  //   )
+  //   .then((response) => {
+  //     if (response.data.admin === true) {
+  //       setUser(response.data);
+  //     }
+  //   })
+  // }, [])
+
   useEffect(() => {
-    axios.get(
-      'http://localhost:3001/',
-      { withCredentials: true },
-    )
+    const body = { token: sessionStorage.getItem('token') }
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
     .then((response) => {
       if (response.data.admin === true) {
         setUser(response.data);
@@ -61,11 +71,7 @@ const NewPost = () => {
       return setError('Please enter a body for your post before submitting.');
     }
     const body = { title: title, content: content, userID: user.id };
-    axios.post(
-      'http://localhost:3001/posts', 
-      body,
-      { withCredentials: true }
-    )
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, body)
     .then((response) => {
       if (response.data.errors) {
         return setError(response.data.errors[0].msg);
@@ -87,11 +93,7 @@ const NewPost = () => {
       return setError('Please enter a body for your post before submitting.');
     }
     const body = { title: title, content: content, userID: user.id, updated: new Date() };
-    axios.put(
-      `http://localhost:3001/posts/${post._id}`,
-      body,
-      { withCredentials: true },
-    )
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`, body)
     .then((response) => {
       if (response.data.errors) {
         return setError(response.data.errors[0].msg);
@@ -110,7 +112,7 @@ const NewPost = () => {
         user.admin ?
         <div className="new-post">
           <h1>Write A New Post</h1>
-          <form action="http://localhost:3001/posts" method="POST">
+          <form action="" method="POST">
             <div className="post-form">
               <label htmlFor="title">Title: </label>
               <input type="text" name="title" id="title" 
