@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
+import axios from 'axios';
 
 import '../stylesheets/Card.css';
 import Comment from '../images/comment.svg';
@@ -14,10 +15,9 @@ const Card = ({ users, post }) => {
 
   // Gets number of comments on post
   useEffect(() => {
-    fetch(`http://localhost:3001/posts/${post._id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      setComments(data.total_comments)
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${post._id}`)
+    .then((response) => {
+      setComments(response.data.total_comments)
     });
   }, [comments, post._id]);
 

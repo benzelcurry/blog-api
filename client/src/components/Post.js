@@ -19,20 +19,19 @@ const Post = () => {
   const myData = location.state;
   const navigate = useNavigate();
 
+  // Gets post data and its list of comments
   useEffect(() => {
-    fetch(`http://localhost:3001/posts/${id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      setPost(data.post);
-      setComments(data.comments);
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
+    .then((results) => {
+      setPost(results.data.post);
+      setComments(results.data.comments);
     });
   }, [myData.author, id]);
 
+  // Fetches user ID from server
   useEffect(() => {
-    axios.get(
-      'http://localhost:3001/', 
-      { withCredentials: true },
-    )
+    const body = { token: sessionStorage.getItem('token') }
+    axios.post(`${process.env.REACT_APP_SERVER_URL}`, body)
     .then((response) => {
       setUser(response.data.id);
     })
@@ -42,14 +41,15 @@ const Post = () => {
     setContent(e.target.value);
   }
 
-  const postComment = async (e) => {
+  const postComment = (e) => {
     e.preventDefault();
     if (content.length === 0) {
       return setError('Please enter a comment before hitting submit');
     }
     const body = { content: content, userID: user, postID: id };
-    axios.post('/comments', body)
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/comments`, body)
       .then((response) => {
+        console.log(response);
         if (response.data.message === 'Successful') {
           navigate(0);
         } else {
@@ -76,7 +76,7 @@ const Post = () => {
 
         <div className="comment-prompt">
           <h4>Leave a Comment...</h4>
-          <form action="http://localhost:3001/comments" method="POST" className="comment-form">
+          <form action="" method="POST" className="comment-form">
             <textarea
               onChange={(e) => handleTyping(e)}
               placeholder='Leave a comment... (max: 500 chars)'
