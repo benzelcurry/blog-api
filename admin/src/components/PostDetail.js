@@ -24,32 +24,42 @@ const PostDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3001/posts/${id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      setPost(data.post);
-      setComments(data.comments);
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`)
+    .then((response) => {
+      setPost(response.data.post);
+      setComments(response.data.comments);
     });
   }, [id]);
 
   // Gets current logged in user data
+  // useEffect(() => {
+  //   axios.get(
+  //     'http://localhost:3001/', 
+  //     { withCredentials: true },
+  //   )
+  //   .then((response) => {
+  //     setUser(response.data.id);
+  //     setAdmin(response.data.admin);
+  //   })
+  // }, [])
+
+  // Gets current logged in user data
   useEffect(() => {
-    axios.get(
-      'http://localhost:3001/', 
-      { withCredentials: true },
-    )
+    const body = { token: sessionStorage.getItem('token') }
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
     .then((response) => {
-      setUser(response.data.id);
-      setAdmin(response.data.admin);
+      if (response.data.admin === true) {
+        setUser(response.data.id);
+        setAdmin(response.data.admin)
+      }
     })
   }, [])
 
   // Fetches users from server and stores them in state
   useEffect(() => {
-    fetch('http://localhost:3001/users')
-    .then((response) => response.json())
-    .then((data) => {
-      setUsers(data.user_list);
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
+    .then((response) => {
+      setUsers(response.data.user_list);
     });
   }, []);
 
@@ -79,7 +89,7 @@ const PostDetail = () => {
       return setError('Please enter a comment before hitting submit');
     }
     const body = { content: content, userID: user, postID: id };
-    axios.post('/comments', body)
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/comments`, body)
       .then((response) => {
         if (response.data.message === 'Successful') {
           navigate(0);

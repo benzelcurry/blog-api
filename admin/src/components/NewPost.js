@@ -38,19 +38,6 @@ const NewPost = () => {
     }
   }, [location.state])
 
-  // Sets current user data if they're an admin
-  // useEffect(() => {
-  //   axios.get(
-  //     'http://localhost:3001/',
-  //     { withCredentials: true },
-  //   )
-  //   .then((response) => {
-  //     if (response.data.admin === true) {
-  //       setUser(response.data);
-  //     }
-  //   })
-  // }, [])
-
   useEffect(() => {
     const body = { token: sessionStorage.getItem('token') }
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)

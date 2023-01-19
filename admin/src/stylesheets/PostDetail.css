@@ -63,6 +63,7 @@
   height: 40px;
   width: 160px;
   align-self: center;
+  cursor: pointer;
 }
 
 @media (max-width: 500px) {
