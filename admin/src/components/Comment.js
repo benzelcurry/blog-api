@@ -8,7 +8,7 @@ import '../stylesheets/Comment.css';
 
 const Comment = ({ comment, author }) => {
   const [del, setDel] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -17,15 +17,21 @@ const Comment = ({ comment, author }) => {
   }
 
   const handleDelete = () => {
-    axios.delete(`/comments/${comment._id}`)
+    axios.delete(
+      `${process.env.REACT_APP_SERVER_URL}/comments/${comment._id}`, 
+      { data: { token: sessionStorage.getItem('token') } }
+    )
       .then((response) => {
+        console.log(response);
         if (response.data.message === 'Successful') {
           navigate(0);
         } else {
+          console.log(response);
           setError(response.data.message);
         }
       })
       .catch((err) => {
+        console.log(err);
         throw new Error(err);
       });
   }
