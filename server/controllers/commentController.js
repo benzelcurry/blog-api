@@ -16,8 +16,6 @@ exports.create_comment = [
   (req, res, next) => {
     const errors = validationResult(req);
 
-    // Might need to change how author and parent post are fetched after
-    // client is built
     const comment = new Comment({
       content: req.body.content,
       date_posted: new Date(),
@@ -44,13 +42,12 @@ exports.create_comment = [
 
 // Delete comment on DELETE request
 exports.delete_comment = (req, res, next) => {
-  const decrypt = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
+  const decrypt = jwt.verify(req.body.token, process.env.SECRET_KEY);
   const isAdmin = decrypt.admin;
 
   if (isAdmin) {
     Comment.findByIdAndRemove(req.params.id, (err) => {
       if (err) { return res.json({ message: 'Error' }) };
-
       res.json({ message: 'Successful' });
     });
   } else {
