@@ -27,8 +27,6 @@ const LogIn = () => {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, body)
       .then((response) => {
         if (response.data.message === 'Successful') {
-          // REMOVE CONSOLE.LOG BEFORE DEPLOYMENT
-          console.log(response);
           setToken(response.data.token);
           window.sessionStorage.setItem('token', response.data.token);
           setSuccess(true);

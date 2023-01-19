@@ -17,20 +17,11 @@ const Nav = () => {
     const body = { token: sessionStorage.getItem('token') }
     axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
     .then((response) => {
-      console.log(sessionStorage.getItem('token'))
-      console.log(response);
       setUser(response.data.username);
     })
   }, [token])
 
   const handleClick = (e) => {
-    // axios.get(
-    //   `${process.env.REACT_APP_SERVER_URL}/logout/`,
-    //   { withCredentials: true },
-    // )
-    // .then((response) => {
-    //   navigate(0);
-    // })
     sessionStorage.clear();
     navigate(0);
   }
