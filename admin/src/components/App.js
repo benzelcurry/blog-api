@@ -12,10 +12,8 @@ const App = () => {
   const [username, setUsername] = useState();
 
   useEffect(() => {
-    axios.get(
-      'http://localhost:3001/',
-      { withCredentials: true },
-    )
+    const body = { token: sessionStorage.getItem('token') }
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
     .then((response) => {
       if (response.data.admin === true) {
         setAdmin(response.data.admin);
