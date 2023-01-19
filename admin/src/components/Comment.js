@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import axios from 'axios';
@@ -6,9 +6,10 @@ import axios from 'axios';
 import Delete from '../images/delete.svg';
 import '../stylesheets/Comment.css';
 
-const Comment = ({ comment, author }) => {
+const Comment = ({ comment }) => {
   const [del, setDel] = useState(false);
   const [error, setError] = useState('');
+  const [author, setAuthor] = useState('');
 
   const navigate = useNavigate();
 
@@ -35,6 +36,15 @@ const Comment = ({ comment, author }) => {
         throw new Error(err);
       });
   }
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
+    .then((response) => {
+      const users = response.data.user_list;
+      const commentAuthor = users.find(user => user._id === comment.author);
+      setAuthor(commentAuthor.username);
+    })
+  })
 
   return (
     <div className="comment-container">
