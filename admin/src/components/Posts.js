@@ -16,28 +16,37 @@ const Posts = () => {
 
   // Fetches posts from server and stores them in state
   useEffect(() => {
-    fetch('http://localhost:3001/posts')
-    .then((response) => response.json())
-    .then((data) => {
-      setPosts(data.post_list);
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/posts`)
+    .then((response) => {
+      setPosts(response.data.post_list);
     });
   }, []);
 
   // Fetches users from server and stores them in state
   useEffect(() => {
-    fetch('http://localhost:3001/users')
-    .then((response) => response.json())
-    .then((data) => {
-      setUsers(data.user_list);
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
+    .then((response) => {
+      setUsers(response.data.user_list);
     });
   }, []);
 
+  // // Checks to see if current user is an admin
+  // useEffect(() => {
+  //   axios.get(
+  //     'http://localhost:3001/',
+  //     { withCredentials: true },
+  //   )
+  //   .then((response) => {
+  //     if (response.data.admin === true) {
+  //       setAdmin(response.data.admin);
+  //     }
+  //   })
+  // }, [])
+
   // Checks to see if current user is an admin
   useEffect(() => {
-    axios.get(
-      'http://localhost:3001/',
-      { withCredentials: true },
-    )
+    const body = { token: sessionStorage.getItem('token') }
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/`, body)
     .then((response) => {
       if (response.data.admin === true) {
         setAdmin(response.data.admin);
