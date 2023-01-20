@@ -1,5 +1,9 @@
 Blog REST API CRUD app built with an Express back end server and a React front end client.
 
+CLIENT front end link: https://blog-api-client.web.app/
+
+ADMIN front end link: https://blog-api-admin.web.app/
+
 Technologies
 * MERN stack
 * Express server
@@ -21,3 +25,8 @@ Features
 * Ability to update posts (restricted to admins)
 * Ability to write comments on blog posts
 * Ability to delete posts and comments (restricted to admins)
+
+NOTE: Many of the CRUD operations are restricted to users with admin privileges. Admins
+have the ability to create new posts, update/edit old posts, and delete comments on posts.
+Currently, I'm the only admin on this project, but I can demonstrate these features
+upon request. 
