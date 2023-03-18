@@ -1,10 +1,12 @@
+# Blog API
+
 Blog REST API CRUD app built with an Express back end server and a React front end client.
 
 CLIENT front end link: https://blog-api-client.web.app/
 
 ADMIN front end link: https://blog-api-admin.web.app/
 
-Technologies
+## Technologies
 * MERN stack
 * Express server
 * React front ends
@@ -14,7 +16,7 @@ Technologies
 * bcryptjs password hashing
 * Helmet middleware (for advanced security)
 
-Features
+## Features
 * Two separate React front ends; one for regular users and one for admins
 * Both front ends are responsive on mobile
 * Persistent user log-in verification
